@@ -48,6 +48,11 @@ function Random(seed)
 		return (bigInt(this.seed).shiftRight(48 - bits));
 	}
 	
+	this.nextDouble()
+	{
+		return (bigInt(this.next(26)).shiftLeft(27) + next(27)) / (bigInt(1).shiftLeft(53));
+	}
+	
 	this.nextInt = function(bound) 
 	{
 		var r = this.next(31);
@@ -61,15 +66,16 @@ function Random(seed)
 		return r;
 	}
 	
+	this.nextInt = function()
+	{
+		return this.nextInt(32);
+	}
+	
 	this.nextBoolean = function()
 	{
 		return next(1) != 0;
 	}
 	
-	this.nextInt = function()
-	{
-		return this.nextInt(32);
-	}
 	
 	this.seed = this.initialScramble(seed);
 	//Cannot use setSeed due to initialization
