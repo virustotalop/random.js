@@ -11,7 +11,7 @@ file = "file://" + os.getcwd() + "/test.html"
 print(file)
 driver.get(file)
 
-
+print(driver.page_source)
 
 class TestRandom(unittest.TestCase):
 
