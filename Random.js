@@ -48,7 +48,7 @@ function Random(seed)
 		return (bigInt(this.seed).shiftRight(48 - bits));
 	}
 	
-	this.nextDouble()
+	this.nextDouble = function()
 	{
 		return (bigInt(this.next(26)).shiftLeft(27) + next(27)) / (bigInt(1).shiftLeft(53));
 	}
@@ -64,11 +64,6 @@ function Random(seed)
 			for(var u = r; u - (r = u % bound) + m < 0; u = this.next(31));
 		}
 		return r;
-	}
-	
-	this.nextInt = function()
-	{
-		return this.nextInt(32);
 	}
 	
 	this.nextBoolean = function()
