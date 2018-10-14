@@ -1,10 +1,6 @@
 language: python
 python:
 - "3.6"
-env:
-- MOZ_HEADLESS=1
-addons:
-  firefox: latest
 
 install:
 - "pip install selenium"
@@ -14,4 +10,5 @@ before_script:
 - wget https://github.com/mozilla/geckodriver/releases/download/v0.23.0/geckodriver-v0.23.0-linux64.tar.gz
 - tar -zxvf geckodriver-v0.23.0-linux64.tar.gz
 - export PATH=$PATH:$PWD
+
 script: python test.py
