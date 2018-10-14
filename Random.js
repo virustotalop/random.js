@@ -48,6 +48,14 @@ function Random(seed)
 		return (bigInt(this.seed).shiftRight(48 - bits));
 	}
 	
+	this.nextFloat = function()
+	{
+		//Floats seem to be rounded to 7 decimal points
+		var notRounded = (this.next(24) / (bigInt(1).shiftLeft(24)));
+		var rounded = Number(notRounded.toFixed(7));
+		return rounded;
+	}
+	
 	this.nextDouble = function()
 	{
 		return (bigInt(this.next(26)).shiftLeft(27) + this.next(27)) / (bigInt(1).shiftLeft(53));
