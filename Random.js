@@ -50,7 +50,7 @@ function Random(seed)
 	
 	this.nextDouble = function()
 	{
-		return (bigInt(this.next(26)).shiftLeft(27) + next(27)) / (bigInt(1).shiftLeft(53));
+		return (bigInt(this.next(26)).shiftLeft(27) + this.next(27)) / (bigInt(1).shiftLeft(53));
 	}
 	
 	this.nextInt = function(bound) 
