@@ -45,7 +45,7 @@ function Random(seed)
 	this.next = function(bits)
 	{
 		this.seed = (bigInt(this.seed).multiply(multiplier).add(addend)).and(mask);
-		return (bigInt(this.seed).shiftRight(48 - bits));
+		return (bigInt(this.seed).shiftRight((48 - bits)));
 	}
 	
 	this.nextFloat = function()
