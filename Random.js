@@ -68,7 +68,7 @@ function Random(seed)
 	
 	this.nextBoolean = function()
 	{
-		return next(1) != 0;
+		return this.next(1) != 0;
 	}
 	
 	//Implement nextGaussian
