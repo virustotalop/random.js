@@ -1,8 +1,11 @@
 import unittest
 import os
 from selenium import webdriver
+from selenium.webdriver.firefox.options import Options
 
-driver = webdriver.Firefox()
+options = Options()
+options.add_argument("-headless")
+driver = webdriver.Firefox(options=options)
 
 file = "file://" + os.getcwd() + "/test.html"
 print(file)
