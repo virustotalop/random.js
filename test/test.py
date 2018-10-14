@@ -17,8 +17,8 @@ class TestRandom(unittest.TestCase):
 		self.assertEqual(driver.execute_script("var rand = new Random(100); return rand.nextInt(100);"), 15)
 	def test_next_boolean(self):
 		self.assertEqual(driver.execute_script("var rand = new Random(100); return rand.nextBoolean();"), True)
-		
-		
+	def test_next_double(self):
+		self.assertEqual(driver.execute_script("var rand = new Random(100); return rand.nextDouble();"), 0.7220096548596434)
 
 unittest.main()
 driver.close()
