@@ -76,7 +76,7 @@ function Random(seed)
 		return next(1) != 0;
 	}
 	
+	//Implement nextGaussian
 	
 	this.seed = this.initialScramble(seed);
-	//Cannot use setSeed due to initialization
 }
