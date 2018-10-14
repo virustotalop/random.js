@@ -11,4 +11,6 @@ install:
 
 before_script:
 - cd test
+- wget https://github.com/mozilla/geckodriver/releases/download/v0.23.0/geckodriver-v0.23.0-linux64.tar.gz
+- tar zxvf geckodriver-v0.23.0-linux64.tar.gz
 script: python test.py
