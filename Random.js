@@ -47,7 +47,7 @@ function Random(seed)
 		this.seed = (bigInt(this.seed).multiply(multiplier).add(addend)).and(mask);
 		return (bigInt(this.seed).shiftRight(48 - bits));
 	}
-    
+	
 	this.nextInt = function(bound) 
 	{
 		var r = this.next(31);
@@ -59,6 +59,16 @@ function Random(seed)
 			for(var u = r; u - (r = u % bound) + m < 0; u = this.next(31));
 		}
 		return r;
+	}
+	
+	this.nextBoolean = function()
+	{
+		return next(1) != 0;
+	}
+	
+	this.nextInt = function()
+	{
+		return this.nextInt(32);
 	}
 	
 	this.seed = this.initialScramble(seed);
