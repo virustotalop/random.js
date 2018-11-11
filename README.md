@@ -3,6 +3,9 @@
 
 A port of java.util.Random to javascript.
 
+## Using
+
+`<script src="https://cdn.jsdelivr.net/gh/virustotalop/random.js/Random.js"></script>`
 
 ## Testing
 
