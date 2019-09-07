@@ -47,7 +47,7 @@ class Random {
 	protected next(bits: number): bigint
 	{
 		this.seed = ((this.seed * this.multiplier) + this.addend) & this.mask;
-		return (BigInt(this.seed) >> ((BigInt(48) - BigInt(bits))));
+		return (BigInt(this.seed) >> (BigInt(48) - BigInt(bits)));
 	}
 	
 	public nextFloat(): number
@@ -68,7 +68,7 @@ class Random {
 		let r: bigint = this.next(31);
 		let m: number = bound;
 		if ((bound & m) == 0)  // i.e., bound is a power of 2
-			r = ((BigInt(bound) * r)) >> (BigInt(31));
+			r = ((BigInt(bound) * r) >> BigInt(31));
 		else
 		{
 			for(let u: bigint = r; u - (r = u % BigInt(bound)) + BigInt(m) < 0; u = this.next(31));
