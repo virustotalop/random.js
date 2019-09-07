@@ -22,64 +22,44 @@
  * or visit www.oracle.com if you need additional information or have any
  * questions.
  */
- 
-//Modified version of java.util.Random ported to javascript uses BigInteger library
-//https://github.com/peterolson/BigInteger.js
-	
-function Random(seed) 
-{
-	const mask = bigInt(281474976710655);
-	const multiplier = bigInt(25214903917);
-	const addend = 11;
-	
-	this.initialScramble = function(seed) 
-	{
-		return (bigInt(seed).xor(multiplier)).and(mask);
-	}
-
-	this.setSeed = function(s)
-	{
-		this.seed = this.initialScramble(s);
-	}
-	
-	this.next = function(bits)
-	{
-		this.seed = (bigInt(this.seed).multiply(multiplier).add(addend)).and(mask);
-		return (bigInt(this.seed).shiftRight((48 - bits)));
-	}
-	
-	this.nextFloat = function()
-	{
-		//Floats seem to be rounded to 7 decimal points
-		var notRounded = (this.next(24) / (bigInt(1).shiftLeft(24)));
-		var rounded = Number(notRounded.toFixed(7));
-		return rounded;
-	}
-	
-	this.nextDouble = function()
-	{
-		return (bigInt(this.next(26)).shiftLeft(27) + this.next(27)) / (bigInt(1).shiftLeft(53));
-	}
-	
-	this.nextInt = function(bound) 
-	{
-		var r = this.next(31);
-		var m = bound;
-		if ((bound & m) == 0)  // i.e., bound is a power of 2
-			r = ((bigInt(bound).multiply(r)).shiftRight(31));
-		else
-		{
-			for(var u = r; u - (r = u % bound) + m < 0; u = this.next(31));
-		}
-		return r;
-	}
-	
-	this.nextBoolean = function()
-	{
-		return this.next(1) != 0;
-	}
-	
-	//Implement nextGaussian
-	
-	this.seed = this.initialScramble(seed);
+class Random {
+    constructor(seed) {
+        this.mask = BigInt(281474976710655);
+        this.multiplier = BigInt(25214903917);
+        this.addend = BigInt(11);
+        this.setSeed(BigInt(seed));
+    }
+    initialScramble(seed) {
+        return (seed ^ this.multiplier) & this.mask;
+    }
+    setSeed(s) {
+        this.seed = this.initialScramble(s);
+    }
+    next(bits) {
+        this.seed = ((this.seed * this.multiplier) + this.addend) & this.mask;
+        return (BigInt(this.seed) >> ((BigInt(48) - BigInt(bits))));
+    }
+    nextFloat() {
+        //Floats seem to be rounded to 7 decimal points
+        let notRounded = (this.next(24) / (BigInt(1) << BigInt(24)));
+        let rounded = Number(Number(notRounded).toFixed(7));
+        return rounded;
+    }
+    nextDouble() {
+        return Number((BigInt(this.next(26)) << BigInt(27) + this.next(27)) / (BigInt(1) << BigInt(53)));
+    }
+    nextInt(bound) {
+        let r = this.next(31);
+        let m = bound;
+        if ((bound & m) == 0) // i.e., bound is a power of 2
+            r = ((BigInt(bound) * r)) >> (BigInt(31));
+        else {
+            for (let u = r; u - (r = u % BigInt(bound)) + BigInt(m) < 0; u = this.next(31))
+                ;
+        }
+        return Number(r);
+    }
+    nextBoolean() {
+        return this.next(1) != BigInt(0);
+    }
 }
